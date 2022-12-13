@@ -53,7 +53,7 @@ https://docs.python.org/3/c-api/index.html
 - [] Recurrent NN
   - [] implementation
   - [] Math Derivation
-- [] Attention and Seuquence Mechanisms
+- [] Attention and Sequence Mechanisms
   - [] implementation
   - [] Math Derivation
 - [] Transformers
@@ -61,7 +61,13 @@ https://docs.python.org/3/c-api/index.html
   - [] Math Derivation
 - [] GPU & Parallelization
 
-
+### Reinforcement Learning 
+- [] Q learning
+  - [] Math Derivation
+  - [] implementation
+- [] MDPs
+  - [] Math Derivation
+  - [] implementation  
 
 ### Clustering & Dim Reduction
 - [] K means
