@@ -1,4 +1,4 @@
-# heiseklearn
+# Heiseklearn
 
 Coming Winter 2023
 
