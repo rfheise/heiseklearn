@@ -6,6 +6,7 @@ A machine learning library created by Ryan Heise
 
 ## Todos:
 Moto of the project: "Python when you can but C when you must"
+https://docs.python.org/3/c-api/index.html 
 ### General:
 - [] Numpy & Pandas like implementation
   - [] framework for easily appending to
