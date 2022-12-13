@@ -1,8 +1,7 @@
 # Heiseklearn
+A machine learning library created by Ryan Heise
 
 Coming Winter 2023
-
-A machine learning library created by Ryan Heise
 
 ## Todos:
 Moto of the project: "Python when you can but C when you must"
