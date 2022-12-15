@@ -1,0 +1,6 @@
+When I implement matrix multiplication in C it is probably a good idea to take into account memory fragmentation. 
+For example when taking the transpose of an n dimensional array and then performing multiplication it is probably best to set a boolean stating whether or not it is transposed.
+If it is transposed then multiply accordingly. Due to the way the memory will be allocated in the array it will be better to implement it such that you treat it as a combination of the columns as this will be faster to compute. As where if 
+it is not transposed then just multiply each element of each row by the according element.
+
+Use semaphores for usage of all cpu cores.

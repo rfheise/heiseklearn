@@ -11,12 +11,20 @@ https://docs.python.org/3/c-api/index.html
   - [] framework for easily appending to
   - [] basic operations
     - [] Core implementation in C
+  - [] python modules 
+    - [] https://docs.python.org/3/tutorial/modules.html
   - [] matrix multiplication optimization
   - [] gpu acceleration
 - [] Basic Model Framework
   - [] Model classes
   - [] Loss classes
   - [] Logging
+- [] Create a testing framework
+  - [] datasets
+    - [] default benchmarks
+    - [] datasets that are setup to just model distributions
+  - [] make tests easy to setup and run
+   - [] https://docs.python.org/3/library/unittest.html
  
 ### Supervised
 - [] GLM
