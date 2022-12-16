@@ -4,7 +4,7 @@ A machine learning library created by Ryan Heise
 Coming Winter 2023
 
 ## Todos:
-Moto of the project: "Python when you can but C when you must"
+Moto of the project: "Python when you can but C/C++ when you must"
 https://docs.python.org/3/c-api/index.html 
 ### General:
 - [] Numpy & Pandas like implementation
@@ -25,6 +25,7 @@ https://docs.python.org/3/c-api/index.html
     - [] datasets that are setup to just model distributions
   - [] make tests easy to setup and run
    - [] https://docs.python.org/3/library/unittest.html
+  - [] framework for training on test set and testing on test set
  
 ### Supervised
 - [] GLM
@@ -36,6 +37,9 @@ https://docs.python.org/3/c-api/index.html
   - [] Math Derivation
   - [] implementation
   - [] Kernels
+- [] KNN
+  - [] implementation
+  - [] Math Derivation
 - [] Naive Bayes
   - [] implementation
   - [] Math Derivation
@@ -49,6 +53,9 @@ https://docs.python.org/3/c-api/index.html
   - [] Random Forest
   - [] XGBoost
     - [] Math Derivation
+- [] Perceptron
+  - [] Implementation
+  - [] Math Derivation
 
 ### Neural Nets
 - [] Feed Forward NN

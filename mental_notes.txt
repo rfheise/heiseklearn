@@ -4,3 +4,29 @@ If it is transposed then multiply accordingly. Due to the way the memory will be
 it is not transposed then just multiply each element of each row by the according element.
 
 Use semaphores for usage of all cpu cores.
+
+The more and more I think about it the less I understand for the separation between numpy and pandas. 
+My implementation will be one library that will consist of a mix between the two. 
+Basic Matrix ops to implement
+[] Matrix Mult 
+[] Matrix Addition
+[] Broadcasting
+[] Inverse
+[] Transpose 
+[] Eigenvalue decomposition
+Implement in C as these principles are core to a lot of ML algos and could quickly result in a bottlenecks
+Plus it is easier to parallelize in C 
+
+Basic Pandas Ops:
+[] basic df implementation
+[] basic querying of a df 
+[] basic df operations
+    [] creating a subset of df 
+    [] creating copies 
+*Be aware of memory leaks*
+Possible datastructure representations for constant time queries
+Task seems complicated to do efficiently in C so will create a bare bones implementation in Python
+When time allows or if bottlenecks can not be ignored than transistion to C.
+Perhaps consider implementing in C++ as some of these libraries exist out of the box like <unordered_map>
+
+*Parallelize where appropriate* 
