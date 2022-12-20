@@ -13,7 +13,6 @@ Basic Matrix ops to implement
 [] Broadcasting
 [] Inverse
 [] Transpose 
-[] Eigenvalue decomposition
 Implement in C as these principles are core to a lot of ML algos and could quickly result in a bottlenecks
 Plus it is easier to parallelize in C 
 

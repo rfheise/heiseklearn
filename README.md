@@ -6,6 +6,7 @@ Coming Winter 2023
 ## Todos:
 Moto of the project: "Python when you can but C/C++ when you must"
 https://docs.python.org/3/c-api/index.html 
+https://docs.python.org/3/extending/index.html#extending-index
 ### General:
 - [] Numpy & Pandas like implementation
   - [] framework for easily appending to
