@@ -162,7 +162,7 @@ class DataSet:
         for col in data.columns:
             if data[col].dtype == "object":
                 # makes sure all data points in category have same case
-                data[col] = data[col].str.lower()
+                data[col] = data[col].astype(str).str.lower()
         return data
     
     def clean_columns(self, data):
