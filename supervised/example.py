@@ -1,5 +1,5 @@
 from ..models.Model import Model
-from ..datasets import Banking
+from ..datasets import Banking, Titanic
 from sklearn.linear_model import LogisticRegression
 
 class LogisticReg(Model):
@@ -21,7 +21,7 @@ class LogisticReg(Model):
 if __name__ == "__main__":
 
     #loads the testing data
-    data = Banking()
+    data = Titanic()
     data.load()
 
     # runs benchmark

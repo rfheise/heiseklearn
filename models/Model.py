@@ -23,8 +23,13 @@ class Model:
         # quick metrics right now
         # will be updated in the future
         self.train(data.train_x, data.train_y)
+        preds = self.predict(data.train_x)
+        mcc = matthews_corrcoef(data.train_y, preds)
+        acc = (preds == data.train_y).sum() / preds.size
+        print("train acc: ", acc)
+        print("train mcc:", mcc)
         preds = self.predict(data.test_x)
         mcc = matthews_corrcoef(data.test_y, preds)
         acc = (preds == data.test_y).sum() / preds.size
-        print("mcc:", mcc)
-        print("acc:",acc)
+        print("test acc: ",acc)
+        print("test mcc:", mcc)

@@ -143,7 +143,8 @@ class DataSet:
         # if binary target balance the feature sets
         # does not mess with the balance of the testing data
         if self.types[self.target] == "binary" and init_params:
-            x = self.balance(x)
+            # x = self.balance(x)
+            pass
     
         # performs various cleaning activities
         x = self.clean_strings(x)
@@ -217,7 +218,7 @@ class DataSet:
                 
                 # initializes one hot on training data
                 if init_params:
-                    self.attributes[column] = OneHotEncoder(handle_unknown='infrequent_if_exist', sparse=False)
+                    self.attributes[column] = OneHotEncoder(handle_unknown='ignore', sparse=False)
                     self.attributes[column].fit(data[column].unique().reshape(-1,1))
                
                 # creates numpy 2D matrix of one hot vectors
