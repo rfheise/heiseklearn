@@ -143,8 +143,7 @@ class DataSet:
         # if binary target balance the feature sets
         # does not mess with the balance of the testing data
         if self.types[self.target] == "binary" and init_params:
-            # x = self.balance(x)
-            pass
+            x = self.balance(x)
     
         # performs various cleaning activities
         x = self.clean_strings(x)
