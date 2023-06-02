@@ -151,9 +151,14 @@ class DataSet:
         x = self.clean_binary(x, init_params)
         x = self.clean_categorical(x, init_params)
         x = self.clean_columns(x)
+        
 
         #go back to original feature set and target vector
         y = x[self.target]
+
+        # sets all values between 0,1
+        # x = (x - x.min())/(x.max() - x.min() + 1e-10)
+
         x.drop(self.target, axis=1, inplace=True)
         return x, y
     def clean_strings(self,data):
@@ -202,6 +207,9 @@ class DataSet:
                     # only if in string format does anything need to be done
                     le = LabelEncoder()
                     data[column] = le.fit_transform(data[column])
+                # cheap way to convert boolean column to int
+                data[column] = data[column] + 0
+
         return data
     
     def clean_categorical(self, data, init_params=False):

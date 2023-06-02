@@ -21,7 +21,7 @@ class LogisticReg(Model):
 if __name__ == "__main__":
 
     #loads the testing data
-    data = Titanic()
+    data = Banking()
     data.load()
 
     # runs benchmark
