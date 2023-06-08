@@ -6,8 +6,7 @@
 !.vscode/*.code-snippets
 .data_cache/
 
-*.aux
-*.out
+
 
 *.csv
 # Local History for Visual Studio Code
@@ -71,6 +70,10 @@ cover/
 # Translations
 *.mo
 *.pot
+
+# latex 
+*.aux
+*.out
 
 # Django stuff:
 *.log
