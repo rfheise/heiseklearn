@@ -1,0 +1,205 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\fancyL}{\mathcal{L}}
+\newcommand{\R}{\mathbb{R}}
+\usepackage{bbm}
+\newcommand{\Ind}{\mathbbm{1}}
+\newcommand{\Indy}{\mathbbm{1}\{y = i\}}
+\newcommand{\pard}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Generalized Linear Model (GLM)}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+Generalized linear models are an abstraction of various types of probablistic models used for classification and regression problems. \\
+GLMs assume $Y|X;\theta \sim \text{exponential family}$ (see background). The goal of a GLM is to predict y from x, therefore, it is a supervised learning model. 
+Various probablistic distributions can be represented as an exponetial family and thus can be approximated via a GLM. \\
+Here is a table of some common exponential family distributions and their use cases as a GLM:\\
+\begin{center}
+    \begin{tabular}{ c c c }
+     Type & Distribution & Use Case \\ 
+     Linear Regression & Gaussian & Real Valued Data \\  
+     Logisitic Regression & Bernoulli & Binary classification\\
+     Softmax & Multinomial & Multiclass classification\\
+     Poisson Regression & Poisson & Natural Number\\
+     Exponential Regression & Exponential & Real Positive Number\\
+     Gamma Regression & Gamma & Real Positive Number\\
+     Beta Regression & Beta & Probabilty Distribution\\
+     Dirichlet Regression & Dirichlet & Probabilty Distribution\\
+    \end{tabular}
+\end{center}
+\section{Background}
+
+Exponential Families are distributions whose pdf can be written in the form:
+    $$p(y|\eta) = b(y) e^{\eta^tT(y) - A(\eta)}$$
+    $$y :\text{target variable}$$
+    $$\eta :\text{natural parameter}$$
+    $$T(y) :\text{sufficient statistic}$$
+    $$b(y) : \text{base measure}$$
+    $$A(\eta) :\text{log partition function}$$
+Exponential families have the interesting property, $E[T(y)|\eta] = \frac{\partial A}{\partial \eta}$, that is quite useful for GLMs. \\
+Proof that $E[T(y)|\eta] = \frac{\partial A}{\partial \eta}$:
+    $$E[T(y)|\eta] = \int{T(y) \dot p(y | \eta) dy}$$
+    $$\text{for simplicity } \eta \in \R$$
+    $$\pard{p(y;\eta)}{\eta} = \pard{}{\eta} b(y)e^{\eta T(y) - A(\eta)}$$
+    $$\pard{p(y;\eta)}{\eta} =  b(y) \pard{}{\eta} e^{\eta T(y) - A(\eta)}$$
+    $$\pard{p(y;\eta)}{\eta} =  b(y)  e^{\eta T(y) - A(\eta)} \pard{}{\eta} (\eta T(y) - A(\eta)) $$
+    $$\pard{p(y;\eta)}{\eta} = p(y;\eta) (T(y) - \pard{A(\eta)}{\eta}) $$
+    $$\pard{}{\eta} \int p(y;\eta) dy = \int \pard{p(y;\eta)}{\eta} dy$$
+    $$\pard{}{\eta} \int p(y;\eta) dy = \int p(y;\eta) (T(y) - \pard{A(\eta)}{\eta}) dy$$
+    $$\pard{}{\eta} \int p(y;\eta) dy = \int p(y;\eta)T(y) dy - \int p(y;\eta)\pard{A(\eta)}{\eta} dy$$
+    $$\text{Because }p(y|\eta)\text{ is a pdf } \int p(y|\eta) = 1$$
+    $$\pard{}{\eta} \int p(y;\eta) dy + \int p(y;\eta)\pard{A(\eta)}{\eta} dy = \int p(y;\eta)T(y) dy$$
+    $$\pard{}{\eta} 1 + \pard{A(\eta)}{\eta} \int p(y;\eta) dy = \int p(y;\eta)T(y) dy$$
+    $$0 + \pard{A(\eta)}{\eta} = \int p(y;\eta)T(y) dy$$
+    $$\pard{A(\eta)}{\eta} = E[T(y);\eta]$$
+Here are some examples of common distributions written as a GLM:
+\subsection{Gaussian}
+    $$p(y;\mu,\sigma) = \frac{1}{\sigma \sqrt{2\pi}}e^{\frac{-(y-\mu)^2}{2\sigma^2}}$$
+    $$\text{for simplicity } \sigma^2 = 1$$
+    $$p(y;\mu) = \frac{1}{\sqrt{2\pi}}e^{\frac{-(y-\mu)^2}{2}}$$
+    $$p(y;\mu) = \frac{1}{\sqrt{2\pi}}e^{\frac{-y^2 + 2\mu y - \mu^2}{2}}$$
+    $$p(y;\mu) = \frac{1}{\sqrt{2\pi}}e^{\frac{-y^2}{2}}e^{\frac{2\mu y - \mu^2}{2}}$$
+    $$\text{we can clearly see that this is a GLM}$$
+    $$A(\eta) = \frac{\mu^2}{2}$$
+    $$b(y) = \frac{1}{\sqrt{2\pi}}e^{\frac{-y^2}{2}} $$
+    $$T(y) = y$$
+    $$\eta= \mu$$
+    $$\pard{A{\eta}}{\eta} = \eta$$
+\subsection{Bernoulli}
+    $$p(y;\phi) = \phi^{y}(1-\phi)^{1-y}; y \in \{0,1\}$$
+    $$= e^{y ln(\phi) + (1 - y)ln(1 - \phi)}$$
+    $$= e^{y ln(\frac{\phi}{1 - \phi}) + ln(1 - \phi)}$$
+    $$\text{we can clearly see that this is a GLM}$$
+    $$A(\eta) = -ln(1 - \phi)$$
+    $$b(y) = 1 $$
+    $$T(y) = y$$
+    $$\eta= ln(\frac{\phi}{1 - \phi})$$
+    $$e^{\eta} = \frac{\phi}{1 - \phi}$$
+    $$e^{\eta} -  e^{\eta}\phi= \phi$$
+    $$e^{\eta} = \phi + e^{\eta}\phi$$
+    $$\frac{e^{\eta}}{1 + e^{\eta}} = \phi $$
+    $$\frac{e^{\eta}}{1 + e^{\eta}} \cdot \frac{e^-n}e^{-n} = \phi $$
+    $$\frac{1}{1 + e^{-\eta}} = \phi $$
+    $$\text{This is the sigmoid function! }\sigma(x) =  \frac{1}{1 + e^{-x}}$$
+    $$\pard{A{\eta}}{\eta} = \pard{}{\eta}-ln(1 - \sigma(\eta))$$
+    $$\pard{A{\eta}}{\eta} = \frac{1}{1 - \sigma(\eta)}\pard{}{\eta}(1 + \sigma(\eta))$$
+    $$\pard{A{\eta}}{\eta} = \frac{1}{1 - \sigma(\eta)}(\sigma(\eta) (1 - \sigma(\eta)))$$
+    $$\pard{A{\eta}}{\eta} = \sigma(\eta) = \phi$$
+\subsection{Multinomial}
+    Note that Bernoulli is just a special case of Multinomial 
+    $$\phi \in \R^{k-1}, y \in {1,2...,k}$$
+    $$\text{let } \phi_i \text{ denote the ith entry of } \phi$$
+    $$\text{Note: } \phi_k \text{ is dependent on } \phi_{1...k-1} \text{ so: } \phi_k = (1 - \sum_{i=1}^{k-1} \phi_i) $$
+    $$p(y = i;\phi) = \phi_i$$
+    $$p(y;\phi) = \prod_{i=1}^{k} \phi_i^{\Indy}$$
+    $$\text{Where } \Indy \text{ is the indicator function}$$
+    $$p(y;\phi) = e^{ln(\prod_{i=1}^{k} \phi_i^{\Indy})}$$
+    $$p(y;\phi) = e^{\sum_{i=1}^{k} \Indy ln(\phi_i)}$$
+    $$p(y;\phi) = e^{\sum_{i=1}^{k - 1} \Indy ln(\phi_i) + \Ind\{y=k\}ln(\phi_k)}$$
+    $$p(y;\phi) = e^{\sum_{i=1}^{k - 1} \Indy ln(\phi_i) + (1 - \sum_{i=1}^{k-1} \Indy)ln(\phi_k)}$$
+    $$p(y;\phi) = e^{\sum_{i=1}^{k - 1} \Indy ln(\phi_i) + ln(\phi_k) - \sum_{i=1}^{k-1} \Indy ln(\phi_k)}$$
+    $$p(y;\phi) = e^{\sum_{i=1}^{k - 1} \Indy ln(\frac{\phi_i}{\phi_k}) + ln(\phi_k)}$$
+    $$\text{we can clearly see that this is a GLM}$$
+    $$A(\eta) = -ln(\phi_k)$$
+    $$b(y) = 1 $$
+    $$T(y)_i = \Indy; T: \R \rightarrow \R^{k-1} $$
+    $$\eta_i =  ln(\frac{\phi_i}{\phi_k}); \eta \in \R^{k-1}$$
+    $$e^{\eta_i} =  \frac{\phi_i}{\phi_k}$$
+    $$\phi_k e^{\eta_i} =  \phi_i$$
+    $$\phi_k \sum_{i=1}^{k}e^{\eta_i} =  \sum_{i=1}^{k} \phi_i = 1$$
+    $$\phi_k = \frac{1}{\sum_{i=1}^{k}e^{\eta_i}}$$
+    $$\frac{e^{\eta_i}}{\sum_{i=1}^{k}e^{\eta_i}} =  \phi_i$$
+    $$\pard{A{\eta_i}}{\eta_i} = \pard{}{\eta_i} -ln(\phi_k)$$
+    $$\pard{A{\eta_i}}{\eta_i} = \pard{}{\eta_i} -ln(\frac{1}{\sum_{i=1}^{k}e^{\eta_i}})$$
+    $$\pard{A{\eta_i}}{\eta_i} = \pard{}{\eta_i} ln(\sum_{i=1}^{k}e^{\eta_i})$$
+    $$\pard{A{\eta_i}}{\eta_i} = \frac{1}{\sum_{i=1}^{k}e^{\eta_i}} \pard{}{\eta_i} \sum_{i=1}^{k}e^{\eta_i}$$
+    $$\pard{A{\eta_i}}{\eta_i} = \frac{e^{\eta_i}}{\sum_{i=1}^{k}e^{\eta_i}} = \phi_i$$
+\section{How it works}
+
+The model works by estimating the relationship between y and x by modifying the parameter $\theta$.
+We assume the following:
+\begin{itemize}
+    \item $p(y|x;\theta) \sim \text{Exponential Family}$
+    \item $\eta = \theta^t x$
+    \item Each example is independently and identically distributed
+\end{itemize}
+We then use gradient ascent to maximize the log likelihood of $\theta$ on the distribtion. 
+The GLM makes the prediction by using the expected value of y given our x. i.e. our hypothesis function is equal to E[T(y) | x; $\theta$]. 
+Conveniently, as proven above, E[ T(y) | x; $\theta$] = $\pard{A(\eta)}{\eta}$ = h(x) of the given exponential family. 
+With h(x) being shorthand for our hypothesis function. 
+Lets go back and look at common examples of our hypothesis function.  
+\subsection{Gaussian}
+$$x,\theta \in R^{n+1}$$
+$$x_1 = 1, \text{ for the bias term }$$
+$$h(x) = \eta = \theta^t x$$
+Where n is the number of features.
+\subsection{Bernoulli}
+$$x,\theta \in R^{n+1}$$
+$$x_1 = 1, \text{ for the bias term }$$
+$$h(x) = \sigma(\eta) = \sigma(\theta^t x )$$
+\subsection{Softmax}
+$$x \in R^{n+1}, \theta \in R^{(k -  1) x (n + 1)}$$
+$$\pard{A{\eta_i}}{\eta_i} = \frac{e^{\eta_i}}{\sum_{j=1}^{k}e^{\eta_j}} = \frac{e^{\theta_i^t x}}{\sum_{j=1}^{k}e^{\theta_j^t} x}$$
+
+
+
+\section{Model Space}
+
+The model space is just the set of all possible weights $\theta$. 
+Theta is usually given by $\theta \in \R^{n+1}$.
+
+\section{Score Function}
+
+We score the model based upon the likelihood of $\theta$. Usually we use log-likelihood as it is easier to compute. 
+Since the data is IID:\\
+
+$$\fancyL(\theta) = \prod_{i=1}^{m} p(y|x;\theta)$$
+$$ln(\fancyL(\theta)) = \sum_{i=1}^{m} ln(p(y|x;\theta))$$
+Where m is the number of examles.
+
+\section{Search Method}
+
+Generally, we peform maximum likelihood estimation on $\theta$ to search over the model space. 
+GLMs have another interseting property that makes search easy. For all GLMs the following is true:
+$$\pard{ln(\fancyL(\theta))}{\theta_i} = \sum_{j=1}^{m} (T(y^j) - h(x^j))x^j_i$$
+Therefore, using gradient ascent we get, $\theta_j = \theta_{j-1} + \alpha \sum_{j=1}^{n} (T(y^j) - h(x^j))x^j_i$.\\\\
+Note: this is the common update rule for least squares  ($\theta_j = \theta_{j-1}  + \alpha \sum_{j=1}^{n} (y- \theta^t x)x^j_i$)\\
+Also for simplicity $ \alpha = \frac{\beta}{m}$. Where $\beta \in \R$. $\alpha$ is also known as the learning rate and controls how much theta changes with 
+each iteration of gradient ascent. 
+\\\\
+I will prove $\pard{ln(\fancyL(\theta))}{\theta_i} = \sum_{j=1}^{m} (T(y^j) - h(x^j))x^j_i$ below:
+$$\pard{ln(\fancyL(\theta))}{\theta_i} = \pard{ln(\fancyL(\theta))}{\eta} \pard{\eta}{\theta_i}$$
+$$\pard{ln(\fancyL(\theta))}{\eta}  =  \pard{}{\eta} \sum_{j=1}^{m} ln(b(y^j)e^{\eta T(y^j) - A(\eta)})$$
+$$ = \pard{}{\eta} \sum_{j=1}^{m} ln(b(y^j)) + ln(e^{\eta T(y^j) - A(\eta)})$$
+$$ =  \sum_{j=1}^{m} \pard{}{\eta} {\eta T(y^j) - A(\eta)}$$
+$$ =  \sum_{j=1}^{m} {T(y^j) - \pard{A(\eta)}{\eta}}$$
+$$ =  \sum_{j=1}^{m} {T(y^j) - h(x)}$$
+$$\pard{ln(\fancyL(\theta))}{\eta} \pard{\eta}{\theta_i} = \sum_{j=1}^{m} ({T(y^j) - h(x)}) \pard{\eta}{\theta_i} $$
+$$\pard{ln(\fancyL(\theta))}{\eta} \pard{\eta}{\theta_i} = \sum_{j=1}^{m} ({T(y^j) - h(x)}) x^j_i $$
+We can vectorize gradient ascent on the GLM as follows:
+$$\theta =  \theta + \nabla_{\theta} ln(\fancyL(\theta))$$
+$$\theta =  \theta + X^t(Y-h(X))$$
+$$\theta =  \theta + X^t(Y-A(X\theta))$$
+Where $Y \in \R^{m}, X \in \R^{m x (n+1)}$ and $\theta$ is exponential family dependent. 
+
+
+\section{Explain It Like I'm 5}
+
+GLMs draw a "line" to better understand the data. The line is drawn based upon assumptions between the desired result and the data itself. 
+For example, image you have a room with red and blue balls. You want to classify red balls from blue balls. An easy way to do so would be to draw a line that 
+best separates the two. 
+
+\end{document}
