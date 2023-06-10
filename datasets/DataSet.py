@@ -230,7 +230,7 @@ class DataSet:
                 
                 # initializes one hot on training data
                 if init_params:
-                    self.attributes[column] = OneHotEncoder(handle_unknown='ignore', sparse=False)
+                    self.attributes[column] = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
                     self.attributes[column].fit(data[column].unique().reshape(-1,1))
                
                 # creates numpy 2D matrix of one hot vectors
