@@ -1,7 +1,7 @@
 from .GLM import GLM
 import numpy as np
 from ...debug.Logger import Logger as log
-from ...Tests import TitanicTest, BankTest
+from ...Tests import BankTest
 
 
 
@@ -12,6 +12,6 @@ class Logistic(GLM):
     
 if __name__ == "__main__":
     model = Logistic(batch_frac=1)
-    test = TitanicTest(model)
+    test = BankTest(model)
     test.run_benchmarks()
 
