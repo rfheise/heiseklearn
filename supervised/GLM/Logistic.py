@@ -11,7 +11,7 @@ class Logistic(GLM):
         return 1/(1 + np.exp(-Z))
     
 if __name__ == "__main__":
-    model = Logistic(batch_size=50000)
-    test = BankTest(model)
+    model = Logistic(batch_frac=1)
+    test = TitanicTest(model)
     test.run_benchmarks()
 
