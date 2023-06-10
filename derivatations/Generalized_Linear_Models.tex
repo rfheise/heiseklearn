@@ -192,7 +192,7 @@ $$\pard{ln(\fancyL(\theta))}{\eta} \pard{\eta}{\theta_i} = \sum_{j=1}^{m} ({T(y^
 We can vectorize gradient ascent on the GLM as follows:
 $$\theta =  \theta + \nabla_{\theta} ln(\fancyL(\theta))$$
 $$\theta =  \theta + X^t(Y-h(X))$$
-$$\theta =  \theta + X^t(Y-A(X\theta))$$
+$$\theta =  \theta + X^t(Y-\pard{A(X\theta)}{\eta})$$
 Where $Y \in \R^{m}, X \in \R^{m x (n+1)}$ and $\theta$ is exponential family dependent. 
 
 
