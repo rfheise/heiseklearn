@@ -64,9 +64,9 @@ class DataSet:
         if os.path.exists(train_set) and os.path.exists(test_set):
             self.train_x, self.train_y = self.load_dataset(train_set)
             self.test_x, self.test_y = self.load_dataset(test_set)
-            
-            self.test_y = np.reshape(self.test_y, (self.test_y.shape[0],1))
-            self.train_y = np.reshape(self.train_y, (self.train_y.shape[0],1))
+
+            self.test_y = np.reshape(self.test_y.to_numpy(), (self.test_y.shape[0],1))
+            self.train_y = np.reshape(self.train_y.to_numpy(), (self.train_y.shape[0],1))
             return
         
         #initializes the raw data & cleans it
@@ -79,9 +79,9 @@ class DataSet:
                 os.makedirs(datasets)
             self.save_dataset(self.train_x, self.train_y, train_set)
             self.save_dataset(self.test_x, self.test_y, test_set)
-
-        self.test_y = np.reshape(self.test_y, (self.test_y.shape[0],1))
-        self.train_y = np.reshape(self.train_y, (self.train_y.shape[0],1))
+        print(self.test_y.shape)
+        self.test_y = np.reshape(self.test_y.to_numpy(), (self.test_y.shape[0],1))
+        self.train_y = np.reshape(self.train_y.to_numpy(), (self.train_y.shape[0],1))
 
     def initialize_data(self, file_name):
         # collects raw data from the passed in file 
