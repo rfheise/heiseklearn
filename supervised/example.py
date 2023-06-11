@@ -3,6 +3,9 @@ from ..datasets import Banking,Titanic
 from ..Tests import SalaryTest
 from sklearn.linear_model import LinearRegression
 
+# example class
+# mainly used to compare my models to 
+# sklearn's implementation
 class Example(Model):
     
     def __init__(self, **kwargs):

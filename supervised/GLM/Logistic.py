@@ -8,9 +8,15 @@ from ...Tests import BankTest,TitanicTest
 class Logistic(GLM):
 
     def hypothesis(self, Z):
+        # hypothesis for logisitc is just sigmoid func
         return 1/(1 + np.exp(-Z))
     
+    def predict(self, X):
+        # rounds hypothesis to nearest whole number (0,1)
+        return np.around(super().predict(X))
+    
 if __name__ == "__main__":
+    # runs Titanic Test benchmarks on data
     model = Logistic(batch_frac=1)
     test = TitanicTest(model)
     test.run_benchmarks()

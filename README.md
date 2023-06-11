@@ -17,11 +17,11 @@ Coming Summer 2023
   - [] framework for training on test set and testing on test set
  
 ### Supervised
-- [] GLM
+- [X] GLM
   - [] Poisson
-  - [] Logistic
-  - [] Linear
-  - [] Math Derivation
+  - [X] Logistic
+  - [X] Linear
+  - [X] Math Derivation
 - [] SVM
   - [] Math Derivation
   - [] implementation
