@@ -79,7 +79,6 @@ class DataSet:
                 os.makedirs(datasets)
             self.save_dataset(self.train_x, self.train_y, train_set)
             self.save_dataset(self.test_x, self.test_y, test_set)
-        print(self.test_y.shape)
         self.test_y = np.reshape(self.test_y.to_numpy(), (self.test_y.shape[0],1))
         self.train_y = np.reshape(self.train_y.to_numpy(), (self.train_y.shape[0],1))
 
@@ -119,7 +118,6 @@ class DataSet:
 
     def balance(self, data):
         # balances binary data
-
         #makes sure target is encoded already
         le = LabelEncoder()
         data[self.target] = le.fit_transform(data[self.target])
@@ -194,6 +192,8 @@ class DataSet:
 
         for column in data.columns:
             if self.types[column] == "real":
+                if self.target == column:
+                    continue
                 # initalize mean and stdev from training set
                 if init_params:
                     self.attributes[column] = {}

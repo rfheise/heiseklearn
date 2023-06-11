@@ -1,8 +1,9 @@
 
 
-__all__ = ["Banking", "DataSet", "Titanic"]
+__all__ = ["Banking", "DataSet", "Titanic", "DataScience"]
 
 
 from .Banking import Banking
 from .DataSet import DataSet
 from .Titanic import Titanic
+from .DataScience import DataScience

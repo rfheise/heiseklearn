@@ -20,7 +20,7 @@ class GLM(Model):
 
     def predict(self, X):
         return np.around(self.hypothesis(X @ self.theta))
-
+        
     def train(self, X, y):
         if self.batch_frac:
             self.batch_size = int(len(X) * self.batch_frac) + 1
@@ -33,7 +33,6 @@ class GLM(Model):
             diff = np.squeeze(norm - theta_norm)
             if diff_old != None:
                 percentage_change = abs(abs(diff - diff_old)/diff_old)
-                log.debug(percentage_change)
                 if percentage_change < self.tol:
                     break
             diff_old = diff
