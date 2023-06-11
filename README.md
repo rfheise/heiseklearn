@@ -18,7 +18,7 @@ Coming Summer 2023
  
 ### Supervised
 - [X] GLM
-  - [] Poisson
+  - [X] Poisson
   - [X] Logistic
   - [X] Linear
   - [X] Math Derivation
