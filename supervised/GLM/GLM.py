@@ -44,7 +44,6 @@ class GLM(Model):
             # computes new theta with grad ascent 
             self.theta = self.theta + self.learning_rate * self.grad(X,y)
             norm = np.linalg.norm(self.theta, axis=0)
-
             # computes difference of new and old norms
             diff = np.squeeze(norm - theta_norm)
 
@@ -55,7 +54,7 @@ class GLM(Model):
                 percentage_change = abs(abs(diff - diff_old)/diff_old)
                 if percentage_change < self.tol:
                     break
-                
+
             diff_old = diff
             theta_norm = norm
 

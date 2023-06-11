@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import os
+from scipy import stats
 
 # generic dataset class
 class DataSet:
@@ -212,6 +213,11 @@ class DataSet:
                     # only if in string format does anything need to be done
                     le = LabelEncoder()
                     data[column] = le.fit_transform(data[column])
+                if init_params:
+                    # sets nan to mode 
+                    # should look into later
+                    self.attributes[column] =  np.around(np.sum(data[column]))
+                data[column] = data[column].fillna(self.attributes[column])
                 # cheap way to convert boolean column to int
                 data[column] = data[column] + 0
 

@@ -8,7 +8,6 @@ from ...Tests import SalaryTest
 class LinearRegression(GLM):
 
     def hypothesis(self, Z):
-        
         # hypothesis for linear regression
         # is just X @ theta
         return Z
