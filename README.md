@@ -43,7 +43,7 @@ Coming Summer 2023
   - [] XGBoost
     - [] Math Derivation
 - [] Perceptron
-  - [] Implementation
+  - [X] Implementation
   - [] Math Derivation
 
 ### Neural Nets
