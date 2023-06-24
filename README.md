@@ -26,9 +26,9 @@ Coming Summer 2023
   - [] Math Derivation
   - [] implementation
   - [] Kernels
-- [] KNN
-  - [] implementation
-  - [] Math Derivation
+- [X] KNN
+  - [X] implementation
+  - [X] Math Derivation
 - [] Naive Bayes
   - [] implementation
   - [] Math Derivation
