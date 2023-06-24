@@ -113,7 +113,7 @@ class DataSet:
     def clean_data(self):
         #cleans training data
         self.train_x, self.train_y = self.clean_dataset(self.train_x, self.train_y, True)
-        
+
         #cleans testing data
         self.test_x, self.test_y = self.clean_dataset(self.test_x, self.test_y)
 

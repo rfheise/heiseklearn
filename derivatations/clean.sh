@@ -1,0 +1,2 @@
+
+rm *.aux *.out *.log

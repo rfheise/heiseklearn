@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage[english]{babel}
+\usepackage{amsfonts} 
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{algorithm}
+\newcommand{\R}{\mathbb{R}}
+\usepackage[noend]{algpseudocode}
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\author {Ryan Heise}
+\title{Model Name}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+A K Nearest Neighbors model is one of the simplest models in machine learning. K Nearest Neighbors can be used for 
+both classification and regression. It finds the k-closest data points in the training set to the data point whose value is to be estimated.
+It then uses them to infer it's value.
+
+
+\section{How it works}
+Let $x \in \R^{n}$, $X_{train} \in \R^{m x n}$, $y_{train} \in \R^{m}; y_{train}^{(i)} \in {0,1}$, $f: \R^{k} \rightarrow \R$\\
+m: number of examples in training data, n: number of features\\
+
+A K Nearest Neighbors will try and estimate the value of x. 
+It does this by computing a distance fucntion d to each of the data points in the test set. 
+Then it will take the top k closest points and gather their respective y values. 
+Finally, it will then use a special function f that uses each of those y values  as input to predict x. 
+
+
+\begin{algorithm}
+    \caption{KNN}
+    \begin{algorithmic}[1]
+    \Procedure{KNN}{}
+    \For {i =  1 to m}
+    \State{$distances[i] = d(X_{train}^{(i)},x)$ }
+    \EndFor
+    \State Set distances to be the k largest distances 
+    \State kNearestY = corresponding y values of remaining k values 
+    \State return f(kNearestY)
+    \EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{KNN for Classification}
+    \begin{itemize}
+        \item set f to be the mode
+        \item set the d to be the euclidean distance 
+    \end{itemize}
+    For classification we find the mode of the k-nearest neighbors of the data point we are trying to predict. 
+
+\subsection{KNN for Regression}
+    \begin{itemize}
+        \item set f to be the mea of the values 
+        \item set the d to be the euclidean distance 
+    \end{itemize}
+    For regression we find the mean of the k-nearest neighbors of the data point we are trying to predict. 
+
+
+
+
+
+\section{Explain It Like I'm 5}
+
+KNN tries to predict a value based upon other values surrounding it. For example, consider a room with multiple colors of balls in various distinct sections of the room. 
+If I wanted to predict the color of a ball it would make sense to look at the balls surrounding it.
+
+\end{document}

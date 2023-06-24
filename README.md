@@ -50,6 +50,9 @@ Coming Summer 2023
 - [] Feed Forward NN
   - [] implementation
   - [] Math Derivation
+  - [] Regularization
+    - [] Dropout 
+    - [] Weight Decay
 #### Advanced Concepts
 - [] Convolutional NN
   - [] implementation

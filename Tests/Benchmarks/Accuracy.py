@@ -14,7 +14,7 @@ class Accuracy(Benchmark):
 
     def get_accuracy(self, preds, y):
         # computes accuracy 
-
         num_correct = np.squeeze(np.sum(y == preds)) 
+
         acc = num_correct/len(preds)
         return acc * 100
