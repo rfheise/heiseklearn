@@ -1,8 +1,6 @@
 # Heiseklearn
 A machine learning library created by Ryan Heise
 
-Coming Summer 2023
-
 ### General:
 - [] Basic Model Framework
   - [] Model classes
@@ -23,7 +21,6 @@ Coming Summer 2023
   - [X] Linear
   - [X] Math Derivation
 - [] SVM
-  - [] Math Derivation
   - [] implementation
   - [] Kernels
 - [X] KNN
@@ -31,73 +28,77 @@ Coming Summer 2023
   - [X] Math Derivation
 - [] Naive Bayes
   - [] implementation
-  - [] Math Derivation
 - [] GDA
   - [] implementation
-  - [] Math Derivation
 - [] Trees
   - [] Decision Trees
   - [] Gradient Boosted
-    - [] Math Derivation
   - [] Random Forest
   - [] XGBoost
-    - [] Math Derivation
 - [] Perceptron
   - [X] Implementation
-  - [] Math Derivation
+  
 
 ### Neural Nets
 - [] Feed Forward NN
   - [] implementation
-  - [] Math Derivation
+    -[] forward prop
+    - [] back prop
+    - [] Activations
+      - [] Relu
+      - [] Sigmoid
+      - [] Tanh
+      - [] Softmax
+    - [] Xavier Initialization
   - [] Regularization
     - [] Dropout 
     - [] Weight Decay
+  - [] Optimizers
+    - [] RMSprop 
+    - [] Momentum 
+    - [] Adam
+  - [] Hyperparam Tuning 
+  - [] Batch Normalization 
+
 #### Advanced Concepts
 - [] Convolutional NN
   - [] implementation
- - [] Math Derivation
 - [] Recurrent NN
   - [] implementation
-  - [] Math Derivation
-- [] LSTM 
+- [] LSTM ### Regularization
+* Todo
   - [] implementation
-  - [] Math Derivation
 - [] Autoencoder
   - [] implementation
-  - [] Math Derivation
 - [] Variational Autoencoder
   - [] implementation
-  - [] Math Derivation
 - [] Generative Adversarial Network
   - [] implementation
-  - [] Math Derivation
 - [] Transformers
   - [] implementation
-  - [] Math Derivation
+  
 
 ### Reinforcement Learning 
 - [] Q learning
-  - [] Math Derivation
   - [] implementation
 - [] MDPs
-  - [] Math Derivation
   - [] implementation  
 
 ### Clustering & Dim Reduction
 - [] K means
-  - [] Math Derivation
   - [] implementation
 - [] Mixture of Gaussians
-  - [] Math Derivation
   - [] implementation
 - [] PCA
-  - [] Math Derivation
   - [] implementation
 - [] ICA
-  - [] Math Derviation
   - [] implementation
 
 
-### Regularization
-* Todo
+## Notes 
+I removed the Math Derivations from each section as they were too time consuming and my time is better spent elsewhere. I might go back and add them to sections I feel are important if I have time. 
+
+I also added some extra stuff to deep learning as I think it would be 
+fun to implement it from scratch. 
+
+
