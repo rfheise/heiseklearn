@@ -2,6 +2,7 @@ from ...models.Model import Model
 import numpy as np
 from ...debug.Logger import Logger as log
 
+#Generalized Linear Model Abstract Class
 
 class GLM(Model):
 
@@ -18,7 +19,7 @@ class GLM(Model):
         # batch size for mini batch gradient ascent
         self.batch_size = batch_size
 
-        # fraction of test set to use as batch size
+        # fraction of train set to use as batch size
         # can't be used with batch_size
         self.batch_frac = batch_frac
 

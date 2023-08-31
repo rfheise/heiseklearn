@@ -4,7 +4,6 @@ from ...debug.Logger import Logger as log
 from ...Tests import SalaryTest
 
 
-
 class LinearRegression(GLM):
 
     def hypothesis(self, Z):

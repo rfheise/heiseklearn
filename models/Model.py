@@ -17,7 +17,9 @@ class Model:
         # creates prediction for each data point
         pass 
 
+ 
     def sample(self, X,y, size):
+        # samples a subset of data of <size>
         size = (min(size, y.shape[0]))
         idx = np.random.choice(np.arange(len(y)), size, replace=False)
         x_sample = X[idx]

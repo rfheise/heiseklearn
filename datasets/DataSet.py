@@ -156,7 +156,6 @@ class DataSet:
         x = self.clean_categorical(x, init_params)
         x = self.clean_columns(x)
         
-
         #go back to original feature set and target vector
         y = x[self.target]
 

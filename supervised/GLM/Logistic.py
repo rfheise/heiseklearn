@@ -16,6 +16,7 @@ class Logistic(GLM):
         return np.around(super().predict(X))
     
 if __name__ == "__main__":
+    
     # runs Titanic Test benchmarks on data
     model = Logistic(batch_frac=1)
     test = TitanicTest(model)
