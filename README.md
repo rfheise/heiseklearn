@@ -1,18 +1,20 @@
 # Heiseklearn
 A machine learning library created by Ryan Heise
 
+WIP
+
 ### General:
-- [] Basic Model Framework
-  - [] Model classes
+- [X] Basic Model Framework
+  - [X] Model classes
   - [] Loss classes
   - [] Logging
-- [] Create a testing framework
-  - [] datasets
-    - [] default benchmarks
+- [X] Create a testing framework
+  - [X] datasets
+    - [X] default benchmarks
     - [] datasets that are setup to just model distributions
   - [] make tests easy to setup and run
    - [] https://docs.python.org/3/library/unittest.html
-  - [] framework for training on test set and testing on test set
+  - [] framework for training on train set and testing on test set
  
 ### Supervised
 - [X] GLM
@@ -35,7 +37,7 @@ A machine learning library created by Ryan Heise
   - [] Gradient Boosted
   - [] Random Forest
   - [] XGBoost
-- [] Perceptron
+- [X] Perceptron
   - [X] Implementation
   
 
@@ -65,8 +67,7 @@ A machine learning library created by Ryan Heise
   - [] implementation
 - [] Recurrent NN
   - [] implementation
-- [] LSTM ### Regularization
-* Todo
+- [] LSTM 
   - [] implementation
 - [] Autoencoder
   - [] implementation
