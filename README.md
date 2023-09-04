@@ -41,10 +41,10 @@ WIP
   - [X] Implementation
   
 
-### Neural Nets
+### Deep Learning
 - [] Feed Forward NN
   - [] implementation
-    -[] forward prop
+    - [] forward prop
     - [] back prop
     - [] Activations
       - [] Relu
