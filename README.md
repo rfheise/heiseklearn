@@ -28,8 +28,8 @@ A machine learning library created by Ryan Heise
   - [X] Math Derivation
 - [] Naive Bayes
   - [] implementation
-- [] GDA
-  - [] implementation
+- [X] GDA
+  - [X] implementation
 - [] Trees
   - [] Decision Trees
   - [] Gradient Boosted
