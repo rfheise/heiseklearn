@@ -226,7 +226,7 @@ class DataSet:
         # one hot encodes categorical data
 
         for column in data.columns:
-            if self.types[column] == "string":
+            if self.types[column] == "categorical":
                 # if over 100 categories put rest into other
                 vals = data[column].value_counts()
                 vals = vals.nsmallest(len(vals) - 100)
@@ -261,19 +261,20 @@ class DataSet:
         for column in data.columns:
             self.types[column] = self.identify_type(data[column])
     
-    def identify_type(self, column):
+    @staticmethod
+    def identify_type(column):
         # identifies type of column's data 
 
         # will need to be modified in the future 
         # for more complex datasets 
 
         # if only two options it is binary
-        if column.nunique() == 2:
+        if len(column.unique()) == 2:
             return "binary"
 
         # if type is object than it's probably and string
         if column.dtype == "object":
-            return "string"
+            return "categorical"
         
         # otherwise it is a real value
         return "real"

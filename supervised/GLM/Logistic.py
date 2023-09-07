@@ -1,7 +1,8 @@
 from .GLM import GLM
 import numpy as np
 from ...debug.Logger import Logger as log
-from ...Tests import BankTest,TitanicTest
+from ...Tests import BankTest,TitanicTest, Test 
+from ...datasets import Pokemon
 
 
 
@@ -17,8 +18,8 @@ class Logistic(GLM):
     
 if __name__ == "__main__":
     
-    # runs Titanic Test benchmarks on data
+    # runs Pokemon Test benchmarks on data
     model = Logistic(batch_frac=1)
-    test = TitanicTest(model)
+    test = Test(model, Pokemon())
     test.run_benchmarks()
 

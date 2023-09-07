@@ -6,7 +6,9 @@ from ...debug.Logger import Logger as log
 
 class GLM(Model):
 
-    def __init__(self, learning_rate=.01, num_iter=10000, tol=1e-5, batch_size=1000, batch_frac=None):
+    def __init__(self, learning_rate=.01, num_iter=10000, tol=1e-5, 
+                 batch_size=1000,lambd = 1, batch_frac=None,
+                 decay_rate = 2):
         # alpha
         self.learning_rate = learning_rate
 
@@ -23,6 +25,12 @@ class GLM(Model):
         # can't be used with batch_size
         self.batch_frac = batch_frac
 
+        # L2 regularization constant 
+        self.lambd = lambd
+        
+        # lr decay rate 
+        self.decay_rate = decay_rate
+
     def predict(self, X):
         # just return the hypothesis on the matrix product of X & theta
         return self.hypothesis(X @ self.theta)
@@ -35,6 +43,7 @@ class GLM(Model):
 
         # initialize parameters
         self.theta = np.random.randn(X.shape[1], 1)
+
 
         # computes initial norm
         # used to determine if percentage change in || theta || < tol
@@ -49,7 +58,6 @@ class GLM(Model):
             diff = np.squeeze(norm - theta_norm)
 
             if diff_old != None:
-
                 #  computes percentage change and checks to see if it is 
                 # less than the tolerance
                 percentage_change = abs(abs(diff - diff_old)/diff_old)
@@ -58,7 +66,7 @@ class GLM(Model):
 
             diff_old = diff
             theta_norm = norm
-
+    
     def grad(self, X,y):
         # performs mini batch gradient ascent 
 
@@ -69,6 +77,10 @@ class GLM(Model):
         # computes the gradient using X^t (y - h_{theta}(X))
         # divides by the number of samples to normalize
         gradient = (X.T @ (y - self.hypothesis(X @ self.theta)))/(y.shape[0])
+        
+        # add regularization 
+        gradient =  gradient - (self.lambd/y.shape[0]) * self.theta
+
         return gradient
             
 
