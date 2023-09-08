@@ -20,6 +20,7 @@ if __name__ == "__main__":
     
     # runs Pokemon Test benchmarks on data
     model = Logistic(batch_frac=1)
-    test = Test(model, Pokemon())
+    test = TitanicTest(model)
+    # test = BankTest(model)
     test.run_benchmarks()
 

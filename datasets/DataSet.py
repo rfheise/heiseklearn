@@ -160,7 +160,7 @@ class DataSet:
         y = x[self.target]
 
         # sets all values between 0,1
-        # x = (x - x.min())/(x.max() - x.min() + 1e-10)
+        # x = (x - x.min(axis=0))/(x.max(axis=0) - x.min(axis=0) + 1e-10)
 
         x.drop(self.target, axis=1, inplace=True)
         return x, y
@@ -279,4 +279,3 @@ class DataSet:
         # otherwise it is a real value
         return "real"
     
-

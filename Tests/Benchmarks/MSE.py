@@ -4,10 +4,10 @@ import numpy as np
 
 class MSE(Benchmark):
 
-    def run(self, model, data):
-        # computes predictions 
-        pred_train = model.predict(data.train_x)
-        pred_test =  model.predict(data.test_x)
+    def run(self, model, data, **kwargs):
+
+        # computes predictions
+        pred_train, pred_test = self.extract_preds(model, data, **kwargs)
 
         # prints mse of predictions
         self.log(f"training mse: {self.get_mse(pred_train, data.train_y)}")

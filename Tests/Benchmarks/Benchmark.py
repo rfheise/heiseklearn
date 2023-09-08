@@ -19,7 +19,17 @@ class Benchmark(metaclass=meta):
     def __init__(self):
         pass
 
-    def run(self, model, data):
+    @staticmethod
+    def extract_preds(model, data, **kwargs):
+
+        if "preds_test" in kwargs and "preds_train" in kwargs:
+            pred_train = kwargs["preds_train"]
+            pred_test = kwargs["preds_test"]
+        else:
+            pred_test =  model.predict(data.test_x)
+            pred_train = model.predict(data.train_x)
+        return pred_train, pred_test
+    def run(self, model, data, **kwargs):
         # runs bencmark on model given a specific dataset
         # assume model is pre-trained
         return None

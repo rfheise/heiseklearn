@@ -43,6 +43,10 @@ class Test:
         # trains model
         self.model.train(self.data.train_x, self.data.train_y)
 
+        # make predictions
+        preds_train = self.model.predict(self.data.train_x)
+        preds_test = self.model.predict(self.data.test_x)
+
         for test in self.benchmarks:
             # checks to see if benchmark in list of 
             # supported benchmarks see __init__.py of Benchmarks
@@ -52,6 +56,6 @@ class Test:
 
             # initializes & runs benchmark
             benchmark = benchmarks[test]()
-            benchmark.run(self.model, self.data)
+            benchmark.run(self.model, self.data, preds_test=preds_test, preds_train=preds_train)
                 
         

@@ -4,10 +4,10 @@ from sklearn.metrics import matthews_corrcoef
 
 class MCC(Benchmark):
 
-    def run(self, model, data):
+    def run(self, model, data, **kwargs):
+
         # computes predictions
-        pred_train = model.predict(data.train_x)
-        pred_test =  model.predict(data.test_x)
+        pred_train, pred_test = self.extract_preds(model, data, **kwargs)
         
         # computes mcc between preds and y
         self.log(f"training mcc: {self.get_mcc(pred_train, data.train_y)}")

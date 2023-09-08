@@ -3,10 +3,10 @@ import numpy as np
 
 class Accuracy(Benchmark):
 
-    def run(self, model, data):
+    def run(self, model, data, **kwargs):
+
         # computes predictions
-        pred_train = model.predict(data.train_x)
-        pred_test =  model.predict(data.test_x)
+        pred_train, pred_test = self.extract_preds(model, data, **kwargs)
         
         # prints accuracy of predictions
         self.log(f"training accuracy: {self.get_accuracy(pred_train, data.train_y)}")

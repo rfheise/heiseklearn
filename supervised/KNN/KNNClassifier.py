@@ -1,7 +1,6 @@
 from ...models.Model import Model
 import numpy as np
 from ...Tests import BankTest,TitanicTest,SalaryTest
-import scipy
 from .KNN import KNN
 
 # K Nearest Neighbors for Classification
