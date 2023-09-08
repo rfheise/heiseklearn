@@ -8,11 +8,7 @@ from ...datasets import Pokemon
 # assumes all x are conditionally independent 
 # i.e. forall x_1, x_2 p(x_1 | y) = p(x_1 | y,x_2)
 
-# not the best implementation as I don't use much 
-# vectorization 
-# seems hard to optimize with vectorization
-# as a lot of operations that are bad for mem caching
-# but could benefit from running in parallel
+
 class NaiveBayes(Model):
 
     def __init__(self, bins=10, laplace=1):
@@ -70,7 +66,6 @@ class NaiveBayes(Model):
         self.phi_i_y = []
         
         for i in range(self.classes):
-            print("computing phi")
             # computes phi_i_y by only looking at X|y=i
             X_mask = X[y.reshape(-1) == i]
             self.phi_i_y.append([self.num_unique_normalized(x) for x in X_mask.T])
@@ -79,29 +74,29 @@ class NaiveBayes(Model):
         
         # descretize input
         X = self.descretize(X.to_numpy())
+        X = X.T
 
         # initialze prediction array
-        preds = np.zeros((self.classes, X.shape[0]))
-        print("generating predictions")
+        preds = np.zeros((self.classes, X.shape[1]))
+
         #iterate over classes
         for i in range(self.classes):
             # iterate over examples
-            for j in range(X.shape[0]):
-                # if j % 100:
-                    # print(j)
+            for k in range(X.shape[0]):
+                
                 # iterate over features
-                for k in range(X.shape[1]):
-                    phis = len(self.phi_i_y[i][k])
-                    # if feature not seen label as unknown
-                    if phis <= int(X[j][k]):
-                        preds[i][j] += self.phi_i_y[i][k][phis - 1]
-                    else:
-                        # else use calculated phi
-                        preds[i][j] += self.phi_i_y[i][k][int(X[j][k])]
+                phis = len(self.phi_i_y[i][k])
+                
+                # set max array index to me max index
+                X[k][X[k] >= phis] = phis - 1
+
+                # get entire feature's phi for all examples
+                preds[i] = preds[i] + self.phi_i_y[i][k][X[k].astype(np.int32)]
+
         # computes log prob
         preds = preds + self.phi_y
         # return max pred
-        preds = np.argmax(preds, axis=0).reshape((X.shape[0],1))
+        preds = np.argmax(preds, axis=0).reshape((X.shape[1],1))
         return preds
     
 if __name__ == "__main__":
