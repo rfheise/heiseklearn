@@ -28,8 +28,8 @@ WIP
 - [X] KNN
   - [X] implementation
   - [X] Math Derivation
-- [] Naive Bayes
-  - [] implementation
+- [X] Naive Bayes
+  - [X] implementation
 - [X] GDA
   - [X] implementation
 - [] Trees
