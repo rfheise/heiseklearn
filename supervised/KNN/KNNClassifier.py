@@ -1,6 +1,7 @@
 from ...models.Model import Model
 import numpy as np
-from ...Tests import BankTest,TitanicTest,SalaryTest
+from ...Tests import BankTest,TitanicTest,SalaryTest,Test
+from ...datasets import Football
 from .KNN import KNN
 
 # K Nearest Neighbors for Classification
@@ -20,5 +21,6 @@ if __name__ == "__main__":
     # not 100% on training  w/ k=1 because dataset has duplicate 
     # data points with different target values
     model = KNNClassifier(k=5)
-    test = TitanicTest(model)
+    # test = TitanicTest(model)
+    test = Test(model, Football())
     test.run_benchmarks()
