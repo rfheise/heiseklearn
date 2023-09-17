@@ -1,7 +1,8 @@
 from .GLM import GLM
 import numpy as np
 from ...debug.Logger import Logger as log
-from ...Tests import SalaryTest
+from ...Tests import SalaryTest, Test
+from ...datasets import Football
 
 
 class LinearRegression(GLM):
@@ -19,5 +20,7 @@ if __name__ == "__main__":
     # kind of a bad dataset for linear regression
     # should probably replace with a better one later
     test = SalaryTest(model)
+    test = Test(model,Football())
     test.run_benchmarks()
+    print(model.theta)
 
