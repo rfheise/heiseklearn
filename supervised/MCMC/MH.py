@@ -3,10 +3,12 @@ import numpy as np
 from scipy.stats import multivariate_normal as norm
 from ...Tests import BankTest,TitanicTest, Test 
 import multiprocessing as mp
+from collections import deque
+
 #metropolic hastings algo to estimate posterior for logisitc regression
 class MH(Logistic):
 
-    def __init__(self, burn_in=100, samples=100, chains=5, max_proc=3):
+    def __init__(self, burn_in=100, samples=100, chains=64, max_proc=18):
         self.burn_in = burn_in
         self.samples = samples 
         self.chains = chains
@@ -27,7 +29,7 @@ class MH(Logistic):
     def train_multi_proc(self,X,y):
         
         theta = 0
-        queue = []
+        queue = deque()
         for i in range(self.chains):
             print(f"Running chain {i}")
             parent_conn,child_conn  = mp.Pipe()
@@ -35,11 +37,11 @@ class MH(Logistic):
             queue.append((proc, parent_conn))
             proc.start()
             if len(queue) >= self.max_proc:
-                chain = queue.pop()
+                chain = queue.popleft()
                 theta += chain[1].recv()
                 chain[0].join()
         while len(queue) != 0:
-            chain = queue.pop()
+            chain = queue.popleft()
             theta += chain[1].recv()
             chain[0].join()
                 
